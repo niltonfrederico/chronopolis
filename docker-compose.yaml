@@ -1,0 +1,35 @@
+---
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - chronopolis
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  dev:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - chronopolis
+
+
+volumes:
+  db_data:
+
+networks:
+  chronopolis:

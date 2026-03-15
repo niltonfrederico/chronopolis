@@ -1,0 +1,47 @@
+FROM python:3.14-alpine
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apk add --no-cache \
+    git \
+    curl \
+    build-base \
+    && rm -rf /var/cache/apk/*
+
+# Install poetry
+RUN curl -sSL https://install.python-poetry.org | python3 - \
+    && ln -s /root/.local/bin/poetry /usr/local/bin/poetry \
+    && poetry --version
+
+# Copy dependency files
+COPY pyproject.toml poetry.lock* ./
+
+# Configure poetry and install dependencies
+RUN poetry config virtualenvs.create false \
+    && poetry config cache-dir /tmp/poetry-cache \
+    && poetry install --no-root --with dev --no-interaction --no-ansi \
+    && rm -rf /tmp/poetry-cache
+
+# Copy the rest of the application code
+COPY . .
+
+# Clean up build dependencies and caches (keep poetry for potential runtime use)
+RUN apk del build-base curl \
+    && rm -rf /var/cache/apk/* /root/.cache/pip/* /tmp/*
+
+# Create a user for running the application
+RUN adduser -D belthasar
+
+# Change ownership of the application files to the new user
+RUN chown -R belthasar:belthasar /app
+
+# Switch to the new user
+USER belthasar
+
+# Expose the port the application runs on
+EXPOSE 8080
+
+# Set the command as a simple health check for development
+# Print the current time for now
+CMD ["python", "-c", "import time; print('Health check at', time.ctime())"]

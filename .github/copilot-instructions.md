@@ -14,6 +14,7 @@
 - **Security first** - Always prioritize security in code generation
 - **Double quotes** - Always use `"text"` format
 - **Imports** - Full paths only, one per line, 2 blank lines after
+- **Markdown formatting** - Always ensure 80-column line limit on .md files
 
 ## Quality Control Protocol
 
@@ -64,6 +65,27 @@ of implementing.
 - **Input validation** for all user data
 - **Ruff security rules** (S category) always enabled
 - **No unused variables** except `_` prefixed
+
+## Version Management Policy
+
+**CRITICAL**: Version changes require explicit user authorization:
+
+- **NEVER change versions** of Python, dependencies, or Docker images without
+  explicit user request
+- **NEVER downgrade** versions unless specifically instructed
+- **NEVER upgrade** versions unless user explicitly asks for updates
+- **PRESERVE existing versions** in all configuration files (pyproject.toml,
+  Dockerfile, docker-compose.yaml)
+- **ASK for permission** if a suggested solution requires version changes
+- **EXPLAIN impact** if version changes are necessary for functionality
+
+**Examples of what NOT to do**:
+
+- Changing `python:3.14-alpine` to `python:3.12-alpine` for "stability"
+- Updating Django from 6.x to latest without permission
+- Downgrading dependencies for "compatibility"
+
+**When version changes ARE needed**: Ask user first and explain why.
 
 ## AI Usage Boundaries
 
