@@ -3,16 +3,16 @@ name = "chronopolis"
 version = "0.1.0"
 description = "My own command center"
 authors = [
-    {name = "Nilton Teixeira",email = "9078708+niltonfrederico@users.noreply.github.com"}
+    { name = "Nilton Teixeira", email = "9078708+niltonfrederico@users.noreply.github.com" },
 ]
-license = {text = "AGPLv3"}
+license = { text = "AGPLv3" }
 readme = "README.md"
 requires-python = ">=3.14,<4"
 dependencies = [
     "django (>=6.0.3,<7.0.0)",
     "nicegui (>=3.8.0,<4.0.0)",
     "psycopg[binary] (>=3.3.3,<4.0.0)",
-    "pandas (>=3.0.1,<4.0.0)"
+    "pandas (>=3.0.1,<4.0.0)",
 ]
 
 
@@ -28,41 +28,22 @@ dev = [
     "ruff (>=0.15.6,<0.16.0)",
     "mypy (>=1.19.1,<2.0.0)",
     "django-stubs (>=5.2.9,<6.0.0)",
+    "types-psycopg2 (>=2.9.21.20240819,<3.0.0)",
+    "pandas-stubs (>=2.2.3.241218,<3.0.0)",
     "pre-commit (>=4.5.1,<5.0.0)",
     "pytest (>=9.0.2,<10.0.0)",
     "pytest-django (>=4.12.0,<5.0.0)",
     "pytest-xdist (>=3.8.0,<4.0.0)",
-    "pytest-env (>=1.6.0,<2.0.0)"
+    "pytest-env (>=1.6.0,<2.0.0)",
 ]
 
 [tool.ruff]
 line-length = 88
 target-version = "py314"
-select = [
-    "E",    # pycodestyle errors
-    "W",    # pycodestyle warnings  
-    "F",    # pyflakes
-    "I",    # isort
-    "S",    # flake8-bandit (security)
-    "TC",   # flake8-type-checking
-    "D",    # pydocstyle
-    "Q",    # flake8-quotes
-    "TRY",  # tryceratops
-    "C4",   # flake8-comprehensions
-    "DJ",   # flake8-django
-    "PD",   # pandas-vet
-    "NPY",  # numpy-specific rules
-]
-ignore = [
-    "EM101",  # Exception must not use a string literal, assign to variable first
-    "EM102",  # Exception must not use an f-string literal, assign to variable first  
-    "EM103",  # Exception must not use a .format() string directly, assign to variable first
-    "TRY301", # Abstract `raise` to an inner function
-]
 exclude = [
     "migrations",
     "venv",
-    ".venv", 
+    ".venv",
     "env",
     ".env",
     "__pycache__",
@@ -74,15 +55,67 @@ exclude = [
     "dist",
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings  
+    "F",   # pyflakes
+    "I",   # isort
+    "S",   # flake8-bandit (security)
+    "TC",  # flake8-type-checking
+    "D",   # pydocstyle
+    "Q",   # flake8-quotes
+    "TRY", # tryceratops
+    "C4",  # flake8-comprehensions
+    "DJ",  # flake8-django
+    "PD",  # pandas-vet
+    "NPY", # numpy-specific rules
+]
+ignore = [
+    "EM101",  # Exception must not use a string literal, assign to variable first
+    "EM102",  # Exception must not use an f-string literal, assign to variable first  
+    "EM103",  # Exception must not use a .format() string directly, assign to variable first
+    "TRY301", # Abstract `raise` to an inner function
+]
+
+[tool.ruff.lint.isort]
 known-first-party = ["chronopolis"]
 known-third-party = ["django", "nicegui", "pandas", "psycopg", "numpy"]
 force-single-line = true
 lines-after-imports = 2
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
 inline-quotes = "double"
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+# plugins = ["mypy_django_plugin.main"]  # Disabled until Django project is set up
+
+exclude = [
+    "migrations/",
+    "venv/",
+    ".venv/",
+    "env/",
+    ".env/",
+    "__pycache__/",
+    ".git/",
+    ".mypy_cache/",
+    ".pytest_cache/",
+    ".ruff_cache/",
+    "build/",
+    "dist/",
+]
+
+[tool.django-stubs]
+django_settings_module = "chronopolis.settings"
+strict_settings = true
