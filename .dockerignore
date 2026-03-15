@@ -3,3 +3,4 @@
 !poetry.lock
 !README.md
 !LICENSE
+!chronopolis/**/*.py

@@ -24,7 +24,8 @@ dependencies = [
   "django (>=6.0.3,<7.0.0)",
   "nicegui (>=3.8.0,<4.0.0)",
   "psycopg[binary] (>=3.3.3,<4.0.0)",
-  "pandas (>=3.0.1,<4.0.0)"
+  "pandas (>=3.0.1,<4.0.0)",
+  "environs (>=14.6.0,<15.0.0)"
 ]
 description = "My own command center"
 license = {text = "AGPLv3"}
@@ -39,6 +40,7 @@ strict_settings = true
 
 [tool.mypy]
 exclude = [
+  "manage.py",
   "migrations/",
   "venv/",
   ".venv/",
@@ -65,6 +67,7 @@ package-mode = false
 
 [tool.ruff]
 exclude = [
+  "manage.py",
   "migrations",
   "venv",
   ".venv",
@@ -86,7 +89,15 @@ ignore = [
   "EM101",  # Exception must not use a string literal, assign to variable first
   "EM102",  # Exception must not use an f-string literal, assign to variable first
   "EM103",  # Exception must not use a .format() string directly, assign to variable first
-  "TRY301"  # Abstract `raise` to an inner function
+  "TRY301",  # Abstract `raise` to an inner function
+  "D100",  # Missing docstring in public module
+  "D101",  # Missing docstring in public class
+  "D102",  # Missing docstring in public method
+  "D103",  # Missing docstring in public function
+  "D104",  # Missing docstring in public package
+  "D105",  # Missing docstring in magic method
+  "D106",  # Missing docstring in public nested class
+  "D107"  # Missing docstring in __init__
 ]
 select = [
   "E",  # pycodestyle errors

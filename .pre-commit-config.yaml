@@ -74,4 +74,4 @@ repos:
 # Global configuration
 default_stages: [pre-commit]
 default_install_hook_types: [pre-commit, commit-msg]
-fail_fast: true
+fail_fast: false
