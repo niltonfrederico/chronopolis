@@ -12,12 +12,19 @@ class LowerCaseTextChoices(TextChoices):
         return name.lower()
 
 
+class AccountType(LowerCaseTextChoices):
+    CHECKING = auto(), _("Checking")
+    SAVINGS = auto(), _("Savings")
+    CREDIT = auto(), _("Credit")
+    INVESTMENT = auto(), _("Investment")
+
+
 class Direction(LowerCaseTextChoices):
     INCOME = auto(), _("Income")
     OUTCOME = auto(), _("Outcome")
 
 
-class Categories(LowerCaseTextChoices):
+class Category(LowerCaseTextChoices):
     # Food -> Groceries, Restaurants, Cafes
     FOOD = auto(), _("Food")
     # Transport -> Public Transport, Uber, Gas
@@ -44,3 +51,15 @@ class Categories(LowerCaseTextChoices):
     UTILITIES = auto(), _("Utilities")
     # Other -> Miscellaneous, Uncategorized
     OTHER = auto(), _("Other")
+
+
+class Recurrency(LowerCaseTextChoices):
+    NONE = auto(), _("None")
+    DAILY = auto(), _("Daily")
+    WEEKLY = auto(), _("Weekly")
+    BIWEEKLY = auto(), _("Biweekly")
+    MONTHLY = auto(), _("Monthly")
+    BIMONTHLY = auto(), _("Bimonthly")
+    QUARTERLY = auto(), _("Quarterly")
+    SEMIANNUALLY = auto(), _("Semiannually")
+    ANNUALLY = auto(), _("Annually")
