@@ -34,3 +34,55 @@ dev = [
     "pytest-xdist (>=3.8.0,<4.0.0)",
     "pytest-env (>=1.6.0,<2.0.0)"
 ]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings  
+    "F",    # pyflakes
+    "I",    # isort
+    "S",    # flake8-bandit (security)
+    "TC",   # flake8-type-checking
+    "D",    # pydocstyle
+    "Q",    # flake8-quotes
+    "TRY",  # tryceratops
+    "C4",   # flake8-comprehensions
+    "DJ",   # flake8-django
+    "PD",   # pandas-vet
+    "NPY",  # numpy-specific rules
+]
+ignore = [
+    "EM101",  # Exception must not use a string literal, assign to variable first
+    "EM102",  # Exception must not use an f-string literal, assign to variable first  
+    "EM103",  # Exception must not use a .format() string directly, assign to variable first
+    "TRY301", # Abstract `raise` to an inner function
+]
+exclude = [
+    "migrations",
+    "venv",
+    ".venv", 
+    "env",
+    ".env",
+    "__pycache__",
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    "build",
+    "dist",
+]
+
+[tool.ruff.isort]
+known-first-party = ["chronopolis"]
+known-third-party = ["django", "nicegui", "pandas", "psycopg", "numpy"]
+force-single-line = true
+lines-after-imports = 2
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.ruff.flake8-quotes]
+docstring-quotes = "double"
+inline-quotes = "double"
