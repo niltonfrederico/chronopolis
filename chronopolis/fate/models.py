@@ -71,7 +71,11 @@ class Transaction(BaseModel):
             BTreeIndex(fields=["account"]),
             BTreeIndex(fields=["direction"]),
             BTreeIndex(fields=["category"]),
-            BTreeIndex(fields=["paid_at"], condition=models.Q(paid_at__isnull=True)),
+            BTreeIndex(
+                fields=["paid_at"],
+                condition=models.Q(paid_at__isnull=True),
+                name="unpaid_paid_at_idx",
+            ),
         )
 
     def __str__(self) -> str:
