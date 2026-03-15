@@ -23,8 +23,10 @@ repos:
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
+        types: [python]
         description: Run ruff linter with auto-fix
       - id: ruff-format
+        types: [python]
         description: Run ruff formatter
 
   # Python type checking (using local mypy with stubs from pyproject.toml)
@@ -53,6 +55,7 @@ repos:
     hooks:
       - id: markdownlint
         args: [--fix]
+        types: [markdown]
         description: Lint and fix markdown files
 
   # TOML linting and formatting
@@ -61,6 +64,7 @@ repos:
     hooks:
       - id: pretty-format-toml
         args: [--autofix]
+        types: [toml]
         description: Format TOML files
 
   # YAML linting
@@ -69,6 +73,7 @@ repos:
     hooks:
       - id: yamllint
         args: [--format, parsable, --strict]
+        types: [yaml]
         description: Lint YAML files
 
 # Global configuration
