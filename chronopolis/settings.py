@@ -10,8 +10,15 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from environs import Env
+
+
+if TYPE_CHECKING:
+    import django_stubs_ext
+
+    django_stubs_ext.monkeypatch()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
