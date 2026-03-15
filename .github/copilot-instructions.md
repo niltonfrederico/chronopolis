@@ -2,102 +2,90 @@
 
 ## Project Overview
 
-- **Name**: Chronopolis - My own command center
+- **Name**: Chronopolis - Personal command center
 - **Tech Stack**: Django 6.x, NiceGUI 3.x, PostgreSQL (psycopg), Pandas 3.x
-- **Python Version**: 3.14+
-- **Environment**: Poetry-managed virtual environment
+- **Python**: 3.14+ with Poetry environment
+- **Quality**: Pre-commit hooks enforce all standards
 
-## Core Development Preferences
+## Core Development Philosophy
 
-### Philosophy
-
-- **"Explicit is better than implicit"** - The most important PEP20 Zen principle
-- **Hard typing user** - Always use comprehensive type hints
+- **"Explicit is better than implicit"** - Primary PEP20 principle
+- **Hard typing** - Comprehensive type hints required (MyPy strict)
 - **Security first** - Always prioritize security in code generation
+- **Double quotes** - Always use `"text"` format
+- **Imports** - Full paths only, one per line, 2 blank lines after
 
-### Code Style
+## Quality Control Protocol
 
-- **Quotes**: Always double quotes (`"text"`)
-- **Typing**: Extensive type hints required - MyPy strict mode enabled
-- **Docstrings**: Google convention when present
-- **Imports**: Full paths only, one per line, 2 lines after imports
+**CRITICAL**: Before answering or generating anything, evaluate if the request
+actually improves the project:
 
-## Type Checking & Linting
+1. **TL;DR Assessment**: State in one sentence if this adds value or creates
+   unnecessary complexity
+2. **Full Analysis**: If declining, explain why (violates guidelines, adds no
+   value, creates tech debt, etc.)
 
-### MyPy Configuration (Strict Mode)
-
-```toml
-[tool.mypy]
-python_version = "3.14"
-strict = true
-warn_return_any = true
-warn_unused_configs = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-ignore_missing_imports = true
-# plugins = ["mypy_django_plugin.main"]  # Enable after Django setup
-```
-
-**Type Stubs Installed:**
-- `django-stubs` - Django type support
-- `types-psycopg2` - PostgreSQL driver types
-- `pandas-stubs` - Pandas type support
-
-### Ruff Configuration
-
-```toml
-[tool.ruff.lint]
-select = ["E", "W", "F", "I", "S", "TC", "D", "Q", "TRY", "C4", "DJ", "PD", "NPY"]
-ignore = ["EM101", "EM102", "EM103", "TRY301"]
-
-[tool.ruff.lint.isort]
-known-first-party = ["chronopolis"]
-known-third-party = ["django", "nicegui", "pandas", "psycopg", "numpy"]
-force-single-line = true
-lines-after-imports = 2
-```
+If the request doesn't improve the project, decline with explanation instead
+of implementing.
 
 ## Development Workflow
 
-1. **Environment Check**: `poetry env info` before setup
-2. **Dependencies**: `poetry install --with dev`
-3. **Type Check**: `poetry run mypy <file>`
-4. **Linting**: `poetry run ruff check <file>`
-5. **Auto-fix**: `poetry run ruff check --fix <file>`
+### Setup
+
+1. `poetry env info` - Check environment
+2. `poetry install --with dev` - Install dependencies
+3. `pre-commit install` - Setup quality gates
+
+### Daily Development
+
+1. **Code** → **Pre-commit** (auto-runs on commit)
+2. **Manual checks**: `poetry run mypy .` / `poetry run ruff check .`
+3. **Pre-commit test**: `pre-commit run --all-files`
+
+### Pre-commit Management
+
+- **Before changes**: `pre-commit autoupdate`
+- **After changes**: `pre-commit autoupdate` + test
+- All hooks must pass before commits are allowed
+- Enforces: code quality, type safety, conventional commits, file
+  formatting
+
+## Type System (MyPy Strict)
+
+- **All functions** must have return type annotations
+- **Explicit optionals**: Use `Optional[T]`, never implicit
+- **No `Any` types** unless absolutely necessary
+- **Type stubs**: django-stubs, types-psycopg2, pandas-stubs installed
+
+## Security & Standards
+
+- **Never hardcode credentials** or sensitive data
+- **Parameterized queries** for database access
+- **Input validation** for all user data
+- **Ruff security rules** (S category) always enabled
+- **No unused variables** except `_` prefixed
+
+## AI Usage Boundaries
+
+**MANDATORY**: All AI assistance must comply with
+[AI_DISCLAIMER.md](../AI_DISCLAIMER.md)
+
+**Permitted**: Documentation, configuration, small utilities, type
+definitions
+**Prohibited**: Large code generation, user data processing, "vibe coding"
+
+Decline any request violating these boundaries with clear explanation.
 
 ## Technology Guidelines
 
-### Type Hints
-- All functions must have return type annotations
-- Use `Optional[T]` explicitly, never rely on implicit optionals
-- Complex types go in `.pyi` files when needed
-- No `Any` types unless absolutely necessary
-
-### Django
-- Include `__str__` methods in models
-- Use explicit ORM queries
-- Django stubs will be enabled once project structure exists
-
-### Security
-- Never hardcode credentials
-- Use parameterized queries
-- Validate all user inputs
-- Security linting (S rules) always enabled
-
-### Variable Naming
-- No unused variables (F rules enforced)
-- Exception: variables starting with `_` or `__` can be unused
-
-## AI Usage Guidelines
-
-**IMPORTANT**: All AI assistance must comply with [AI_DISCLAIMER.md](../AI_DISCLAIMER.md)
-
-- If any request violates the AI disclaimer, decline and explain why
-- Focus on documentation, configuration, and code completion only
-- No large code generation or "vibe coding"
-- No user data processing
+**Django**: Include `__str__` methods, explicit ORM queries
+**PostgreSQL**: Use psycopg with type safety
+**NiceGUI**: Follow component-based architecture
+**Pandas**: Leverage type stubs for data operations
 
 ---
+
+Quality enforced by pre-commit • Security by design • Types by MyPy
 
 *Optimized for GitHub Copilot with Claude Sonnet 4*
 *Last Updated: March 14, 2026*

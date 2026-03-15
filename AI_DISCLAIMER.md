@@ -4,7 +4,9 @@
 
 ### Responsible AI Development
 
-This project uses AI assistance (GitHub Copilot with Claude Sonnet 4) in a controlled and responsible manner. This document outlines the specific boundaries and ethical guidelines governing AI usage in this project.
+This project uses AI assistance (GitHub Copilot with Claude Sonnet 4) in a
+controlled and responsible manner. This document outlines the specific
+boundaries and ethical guidelines governing AI usage in this project.
 
 ### Permitted AI Usage
 
@@ -49,13 +51,17 @@ This project uses AI assistance (GitHub Copilot with Claude Sonnet 4) in a contr
 
 ### Development Philosophy
 
-**Human-Centric Development**: All critical decisions, architecture choices, and business logic remain under direct human control.
+**Human-Centric Development**: All critical decisions, architecture choices,
+and business logic remain under direct human control.
 
-**Transparency**: All AI assistance is documented and reviewable through version control.
+**Transparency**: All AI assistance is documented and reviewable through
+version control.
 
-**Security First**: No sensitive data, credentials, or proprietary information is shared with AI systems.
+**Security First**: No sensitive data, credentials, or proprietary
+information is shared with AI systems.
 
-**Quality Assurance**: All AI-assisted code undergoes the same review, testing, and quality standards as manually written code.
+**Quality Assurance**: All AI-assisted code undergoes the same review,
+testing, and quality standards as manually written code.
 
 ### Compliance & Oversight
 
@@ -70,5 +76,5 @@ For questions about AI usage in this project: [See project documentation]
 
 ---
 
-*Last Updated: March 14, 2026*  
+*Last Updated: March 14, 2026*
 *This disclaimer governs all AI assistance in the Chronopolis project*

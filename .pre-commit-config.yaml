@@ -1,0 +1,77 @@
+---
+# Pre-commit configuration for Chronopolis
+# See https://pre-commit.com for more information
+repos:
+  # General file formatting hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        description: Trim trailing whitespace
+      - id: end-of-file-fixer
+        description: Ensure files end with newline
+      - id: check-merge-conflict
+        description: Check for merge conflict markers
+      - id: check-case-conflict
+        description: Check for case conflicts
+      - id: check-added-large-files
+        description: Prevent giant files from being committed
+
+  # Python code formatting and linting (official ruff hook)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.6
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        description: Run ruff linter with auto-fix
+      - id: ruff-format
+        description: Run ruff formatter
+
+  # Python type checking (using local mypy with stubs from pyproject.toml)
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: poetry run mypy
+        language: system
+        types: [python]
+        description: Run mypy type checker with installed stubs
+        pass_filenames: false
+        args: ['.']
+
+  # Conventional commits enforcement
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        description: Enforce conventional commit messages
+
+  # Markdown linting and formatting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.48.0
+    hooks:
+      - id: markdownlint
+        args: [--fix]
+        description: Lint and fix markdown files
+
+  # TOML linting and formatting
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.16.0
+    hooks:
+      - id: pretty-format-toml
+        args: [--autofix]
+        description: Format TOML files
+
+  # YAML linting
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+        args: [--format, parsable, --strict]
+        description: Lint YAML files
+
+# Global configuration
+default_stages: [pre-commit]
+default_install_hook_types: [pre-commit, commit-msg]
+fail_fast: true
