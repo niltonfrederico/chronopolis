@@ -7,6 +7,25 @@
 - **Python**: 3.14+ with Poetry environment
 - **Quality**: Pre-commit hooks enforce all standards
 
+## App Naming Schema
+
+**IMPORTANT**: All Django app names are based on the **Chrono Cross** game,
+specifically locations and elements from the **Chronopolis** map.
+
+### Naming Reference
+
+- **prometheus**: Refers to the **Prometheus Circuit** (Robo's circuit/area),
+  NOT the monitoring tool
+- **fate**: Refers to the FATE system from Chrono Cross
+- **Future apps**: Should follow Chronopolis locations (Terra Tower, Central
+  Ruins, etc.)
+
+This thematic naming helps maintain consistency and avoids confusion with
+similarly named technologies (e.g., Prometheus monitoring, Kafka, etc.).
+
+When suggesting or creating new apps, always reference Chrono Cross lore for
+appropriate naming.
+
 ## Core Development Philosophy
 
 - **"Explicit is better than implicit"** - Primary PEP20 principle
@@ -28,6 +47,10 @@ actually improves the project:
 
 If the request doesn't improve the project, decline with explanation instead
 of implementing.
+
+**RESPONSE MODE**: Unless explicitly asked to generate, fix, or perform an
+action, provide answers and explanations only. Don't automatically implement
+solutions when discussing or exploring options.
 
 ## Development Workflow
 
